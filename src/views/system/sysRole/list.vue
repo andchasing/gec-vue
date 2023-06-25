@@ -30,7 +30,12 @@
     </div>
     <!-- 工具条 -->
     <div class="tools-div">
-      <el-button type="success" icon="el-icon-plus" size="mini" @click="add"
+      <el-button
+        type="success"
+        icon="el-icon-plus"
+        size="mini"
+        @click="add"
+        :disabled="$hasBP('bnt.sysRole.add') === false"
         >添 加</el-button
       >
       <el-button class="btn-add" size="mini" @click="batchRemove()">
@@ -131,7 +136,8 @@ import api from '@/api/role/role.js'
 export default {
   data() {
     return {
-      listLoading: true, //  加载中的提示语.....
+      //  加载中的提示语.....
+      listLoading: true,
       list: [],
       total: 0,
       page: 1,
@@ -271,18 +277,18 @@ export default {
             this.$message({
               type: "success",
               message: "删除成功!",
-            });
+            })
             // 刷新页面
             this.fetchData()
           })
-      });
+      })
     },
     handleSelectionChange(selectValue) {
       // console.log(selectValue);
       this.selectValueData = selectValue
     },
     showAssignAuth(row) {
-      this.$router.push('/system/assignAuth?id=' + row.id + '&roleName=' + row.roleName);
+      this.$router.push('/system/assignAuth?id=' + row.id + '&roleName=' + row.roleName)
     }
   }
 }
